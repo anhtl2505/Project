@@ -69,9 +69,14 @@ public class Calculate {
 			// Result
 			driver.findElement(By.id("BtnCalc")).click();
 			Thread.sleep(2000);
+			
+			//Get Actual Result
 			float rs = Float.parseFloat(driver.findElement(By.id("input")).getAttribute("value"));
+			//Write Actual REsult to Excel
 			sheet.getRow(i).createCell(4).setCellValue(rs);		
 			cell = sheet.getRow(i).getCell(3);
+			
+			//Compare 
 			float temp = (float) cell.getNumericCellValue();
 			if (rs == temp) {
 				cell = sheet.getRow(i).getCell(4);
@@ -81,6 +86,7 @@ public class Calculate {
 				cell = sheet.getRow(i).getCell(4);
 				sheet.getRow(i).createCell(5).setCellValue("Fail");				
 			}
+			//Output File
 			FileOutputStream fout=new FileOutputStream(new File("F:\\Result.xls"));	        
 			workbook.write(fout);
 	        fout.close(); 

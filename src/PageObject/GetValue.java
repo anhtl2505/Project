@@ -46,15 +46,18 @@ public class GetValue {
 			Thread.sleep(4000);
 
 			cell = sheet.getRow(i).getCell(1);
-
+			
+			
+			//Compare
 			cell.setCellType(Cell.CELL_TYPE_STRING);
 			if (Search.Verify_Tiltle(driver).equals(cell.getStringCellValue())) {
 				sheet.getRow(i).createCell(2).setCellValue("Pass");
 				
 			} else {
 				sheet.getRow(i).createCell(2).setCellValue("Fail");				
-/*				cell.setCellValue("Fail");
-*/			}
+			}
+			
+			//Output File
 			FileOutputStream fout=new FileOutputStream(new File("F:\\Result.xls"));	        
 			workbook.write(fout);
 	        fout.close(); 
