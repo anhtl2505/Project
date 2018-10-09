@@ -4,6 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
 
 public class Search {
 
@@ -11,11 +15,19 @@ public class Search {
 
 	public static void Execute(WebDriver driver) throws InterruptedException {
 
+	    WebDriverWait wait =new WebDriverWait(driver, 10);
+
+		
 		Search.Search_Input(driver).sendKeys("Eclipse");
 		Thread.sleep(1000);
 		Search.Btn_Search(driver).sendKeys(Keys.ENTER);
-		Thread.sleep(3000);
+		
+		element = wait.until(ExpectedConditions.elementToBeClickable(Search.Hyperlink_Click1(driver)));
+
 		Search.Hyperlink_Click1(driver).click();
+		Thread.sleep(3000);
+		
+	    Assert.assertEquals("Enabling Open Innovation & Collaboration | The Eclipse Foundation", Search.Verify_Tiltle(driver));    
 
 	}
 

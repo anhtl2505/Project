@@ -15,6 +15,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GetValue {
 
@@ -24,7 +26,9 @@ public class GetValue {
 	private static HSSFCell cell;
 
 	public static void Execute(WebDriver driver) throws InterruptedException, IOException {
+	    WebDriverWait wait =new WebDriverWait(driver, 10);
 
+	   
 		File src = new File("C:\\Users\\anhtl\\Desktop\\DataSearch.xls");
 		// Load the file.
 		FileInputStream fis = new FileInputStream(src);
@@ -41,9 +45,11 @@ public class GetValue {
 			driver.findElement(By.id("lst-ib")).clear();
 			driver.findElement(By.id("lst-ib")).sendKeys(cell.getStringCellValue());
 			driver.findElement(By.id("lst-ib")).sendKeys(Keys.ENTER);
-			Thread.sleep(4000);
+			
+			
+			WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"rso\"]/div[1]/div/div/div/div/div[1]/a/h3")));
 			driver.findElement(By.xpath("//*[@id=\"rso\"]/div[1]/div/div/div/div/div[1]/a/h3")).click();
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 
 			cell = sheet.getRow(i).getCell(1);
 			

@@ -3,6 +3,8 @@ package PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignIn {
 
@@ -10,14 +12,17 @@ public class SignIn {
 
 	public static void Execute(WebDriver driver) throws InterruptedException {
 
+	    WebDriverWait wait =new WebDriverWait(driver, 10);
+
+		
 		SignIn.btn_SignIn(driver).click();
+		element = wait.until(ExpectedConditions.elementToBeClickable(SignIn.btn_Next(driver)));
 		SignIn.txtbx_EmailOrPhone(driver).sendKeys("mindy.kenz@gmail.com");
 		SignIn.btn_Next(driver).click();
 		Thread.sleep(2000);
 		SignIn.txtbx_Password(driver).sendKeys("753869123");
 		SignIn.btn_LogIn(driver).click();
 		Thread.sleep(2000);
-
 	}
 
 	// Get element Button SignIn
@@ -34,8 +39,7 @@ public class SignIn {
 
 	// Get element Button Next
 	public static WebElement btn_Next(WebDriver driver) {
-		element = driver.findElement(By
-				.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/content/span"));
+		element = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/content/span"));
 		return element;
 	}
 
